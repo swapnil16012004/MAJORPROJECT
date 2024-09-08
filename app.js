@@ -21,7 +21,7 @@ const listingRouter = require('./routes/listing.js');
 const reviewRouter = require('./routes/review.js');
 const userRouter = require('./routes/user.js');
 const { error } = require('console');
-const listingController = require("./controllers/listings.js");
+
 
 const dbUrl = process.env.ATLASDB_URL;
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
@@ -85,17 +85,8 @@ app.use((req, res, next) => {
     next();
 })
 
-// app.get("/demouser", async(req, res) => {
-//     let fakeUser = new User({
-//         email : "student@gmail.com",
-//         username : "delta-student"
-//     })
 
-//     let registeredUser = await User.register(fakeUser, "helloWorld");
-//     res.send(registeredUser);
-// })
 
-// app.get("/listings/search", listingController.searchListing);
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
