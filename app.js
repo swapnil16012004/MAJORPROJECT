@@ -21,8 +21,9 @@ const listingRouter = require('./routes/listing.js');
 const reviewRouter = require('./routes/review.js');
 const userRouter = require('./routes/user.js');
 const { error } = require('console');
+const listingController = require("./controllers/listings.js");
 
-// const dbUrl = process.env.ATLASDB_URL;
+const dbUrl = process.env.ATLASDB_URL;
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
 main()
@@ -32,7 +33,7 @@ main()
     console.log(err);
 })
 async function main(){
-   await mongoose.connect(MONGO_URL);
+   await mongoose.connect(dbUrl);
 }
 
 app.set("view engine", "ejs");
@@ -94,9 +95,11 @@ app.use((req, res, next) => {
 //     res.send(registeredUser);
 // })
 
+// app.get("/listings/search", listingController.searchListing);
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
+
 
 
 

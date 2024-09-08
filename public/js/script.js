@@ -17,3 +17,11 @@
       }, false)
     })
   })()
+
+  window.addEventListener('load', function () {
+    if (window.location.pathname === '/listings/search') {
+        if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+            window.location.href = '/listings';
+        }
+    }
+});
